@@ -1,0 +1,95 @@
+  [1m[36mSQL (129.4ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (647.9ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (81.4ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (541.7ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (8.1ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to Locatable (20111201111047)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (283.2ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (200.2ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.7ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to Locatable (20111201111047)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (82.2ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (104.6ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to Locatable (20111201111047)
+  [1m[35mSQL (4.5ms)[0m  CREATE TABLE `locations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `locatable_id` int(11), `locatable_type` varchar(255), `ip` varchar(255), `country` varchar(255), `state` varchar(255), `state_abbreviation` varchar(255), `county` varchar(255), `city` varchar(255), `street` varchar(255), `address` varchar(255), `zip` varchar(255), `lat` float, `lng` float, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (190.6ms)[0m  [1mALTER TABLE locations MODIFY lat numeric(15,10);[0m
+  [1m[35mSQL (83.0ms)[0m  ALTER TABLE locations MODIFY lng numeric(15,10);
+  [1m[36mSQL (6.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111201111047')[0m
+Migrating to CreateHouses (20120402051556)
+  [1m[35mSQL (35.9ms)[0m  CREATE TABLE `houses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120402051556')[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `houses`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `houses`
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `locations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `locations`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+DEPRECATION WARNING: Base#before_destroy has been deprecated, please use Base.before_destroy :method instead. (called from <class:Location> at /home/amol/git/locatable/app/models/location.rb:7)
+DEPRECATION WARNING: Base#before_destroy has been deprecated, please use Base.before_destroy :method instead. (called from <class:Location> at /home/amol/git/locatable/app/models/location.rb:9)
+  [1m[36mSQL (17.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.7ms)[0m  [1mdescribe `houses`[0m
+  [1m[35mAREL (38.0ms)[0m  INSERT INTO `houses` (`name`, `created_at`, `updated_at`) VALUES (NULL, '2012-04-02 05:44:48', '2012-04-02 05:44:48')
+  [1m[36mSQL (0.8ms)[0m  [1mdescribe `locations`[0m
+  [1m[35mAREL (36.6ms)[0m  INSERT INTO `locations` (`locatable_id`, `locatable_type`, `ip`, `country`, `state`, `state_abbreviation`, `county`, `city`, `street`, `address`, `zip`, `lat`, `lng`, `created_at`, `updated_at`) VALUES (1, 'House', NULL, 'USA', 'California', 'CA', NULL, 'Fremont', NULL, 'freemont', '94538', 37.5482498, -121.9885295, '2012-04-02 05:44:48', '2012-04-02 05:44:48')
+  [1m[36mSQL (27.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mHouse Load (91.0ms)[0m  SELECT distinct city FROM locations, houses locatable where locations.locatable_id = locatable.id and locations.locatable_type = 'House' 
+  [1m[36mHouse Load (0.4ms)[0m  [1mSELECT distinct state FROM locations, houses locatable where locations.locatable_id = locatable.id and locations.locatable_type = 'House' [0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (94.8ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (22.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to Locatable (20111201111047)
+  [1m[35mSQL (75.4ms)[0m  CREATE TABLE `locations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `locatable_id` int(11), `locatable_type` varchar(255), `ip` varchar(255), `country` varchar(255), `state` varchar(255), `state_abbreviation` varchar(255), `county` varchar(255), `city` varchar(255), `street` varchar(255), `address` varchar(255), `zip` varchar(255), `lat` float, `lng` float, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (94.1ms)[0m  [1mALTER TABLE locations MODIFY lat numeric(15,10);[0m
+  [1m[35mSQL (116.5ms)[0m  ALTER TABLE locations MODIFY lng numeric(15,10);
+  [1m[36mSQL (7.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111201111047')[0m
+Migrating to CreateHouses (20120402051556)
+  [1m[35mSQL (88.1ms)[0m  CREATE TABLE `houses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (24.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120402051556')[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mdescribe `houses`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `houses`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `locations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `locations`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (80.5ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (22.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to Locatable (20111201111047)
+  [1m[35mSQL (29.1ms)[0m  CREATE TABLE `locations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `locatable_id` int(11), `locatable_type` varchar(255), `ip` varchar(255), `country` varchar(255), `state` varchar(255), `state_abbreviation` varchar(255), `county` varchar(255), `city` varchar(255), `street` varchar(255), `address` varchar(255), `zip` varchar(255), `lat` float, `lng` float, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (35.5ms)[0m  [1mALTER TABLE locations MODIFY lat numeric(15,10);[0m
+  [1m[35mSQL (30.5ms)[0m  ALTER TABLE locations MODIFY lng numeric(15,10);
+  [1m[36mSQL (22.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20111201111047')[0m
+Migrating to CreateHouses (20120402051556)
+  [1m[35mSQL (89.7ms)[0m  CREATE TABLE `houses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (15.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120402051556')[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mdescribe `houses`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `houses`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `locations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `locations`
